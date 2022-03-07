@@ -24,7 +24,7 @@ const Table = ({files, selectedCount, setSelectedCount}) => {
         return( <tr key={file.name}>
             <td><input 
                   type="checkbox" 
-                  disabled={file.status === 'available' ? false : true}
+                  // disabled={file.status === 'available' ? false : true}
                   onChange={handleCheckboxChange}
                 />
             </td>
