@@ -14,9 +14,23 @@ const IconSpan = styled.span`
   }}
 `;
 
-const Icon = ({icon}) => {
-  console.log('icon', icon)
-  return (<IconSpan role="checkbox" aria-checked="false" icon={icon}/>)
+const IconButton = ({icon, role, onclickHandler}) => {
+  if(role === 'checkbox') {
+    return (<IconSpan 
+      role={role}  
+      icon={icon}
+      aria-checked="false"
+      onClick={onclickHandler}
+    />) 
+  } else {
+    return (<IconSpan
+      role={role}  
+      icon={icon}
+      aria-label="button"
+      onClick={onclickHandler}
+    />)
+  }
+
 }
 
-export default Icon;
+export default IconButton;

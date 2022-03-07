@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { data } from '../data/files'
 import Table from './Table';
-import Icon from './Icon';
+import IconButton from './IconButton';
 
 import checkboxSelected from '../assets/check_selected.png';
 import checkboxIndeterminate from '../assets/checkbox_indeterminate.png';
@@ -27,6 +27,7 @@ const IconDiv = styled.div`
 const DownloadComponent = () => {
   const {files} = data;
   const [selectedCount, setSelectedCount] = useState(0);
+
   const selectIcon = () => {
     if(selectedCount === files.length) {
       return checkboxSelected;
@@ -36,17 +37,25 @@ const DownloadComponent = () => {
       return checkboxIndeterminate;
     }
   } 
+  
+  const toggleSelectAll = () => {
+    console.log('toggling select All');
+  }
+
+  const handleDownload = () => {
+    console.log('download clicked');
+  }
 
   
   return (
     <div>
       <DownloadManagementContainer> 
         <IconDiv>
-          <Icon icon={selectIcon()}/>
+          <IconButton icon={selectIcon()} role="checkbox" onclickHandler={toggleSelectAll}/>
           <span>{selectedCount === 0 ? 'None Selected' : `Selected ${selectedCount}`}</span>
         </IconDiv>
         <IconDiv>
-          <Icon icon={download}/>
+          <IconButton icon={download} role="button" onclickHandler={handleDownload}/>
           <span>Download Selected</span>
         </IconDiv>
         
