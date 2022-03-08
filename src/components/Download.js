@@ -11,20 +11,17 @@ import checkboxUnselected from '../assets/checkbox_unselected.png';
 import download from '../assets/download.png';
 
 const DownloadManagementContainer = styled.div`
+  align-items: center;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  height: 40px;
 `;
 
 const IconDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-right: 40px;
 `;
-
-
-// url('https://www.gstatic.com/images/icons/material/system/2x/check_box_outline_blank_black_20dp.png')
-// url('../../public/checbox_unselected.png')
-
 
 const DownloadComponent = () => {
   const {files} = data;
@@ -68,23 +65,23 @@ const DownloadComponent = () => {
   
   return (
     <div>
-      <DownloadManagementContainer> 
-        <IconDiv>
-          <IconButton icon={selectIcon()} role="checkbox" onclickHandler={toggleSelectAll}/>
-          <span>{selectedCount === 0 ? 'None Selected' : `Selected ${selectedCount}`}</span>
-        </IconDiv>
-        <IconDiv>
-          <IconButton icon={download} role="button" onclickHandler={handleDownload}/>
-          <span>Download Selected </span>
-        </IconDiv>
-        
-      </DownloadManagementContainer>
+        <DownloadManagementContainer> 
+          <IconDiv>
+             <IconButton ariaLabel="Toggle select all or select none" icon={selectIcon()} role="checkbox" onclickHandler={toggleSelectAll}/>
+            <span>{selectedCount === 0 ? 'None Selected' : `Selected ${selectedCount}`}</span>
+          </IconDiv>
+          <IconDiv>
+            <IconButton ariaLabel="Download" icon={download} role="button" onclickHandler={handleDownload}/>
+            <span>Download Selected </span>
+          </IconDiv>
+          
+        </DownloadManagementContainer>
+
       <Table files={files} 
              selectedCount={selectedCount} 
              setSelectedCount={setSelectedCount}
              isSelected={isSelected}
-             setIsSelected={setIsSelected}
-             
+             setIsSelected={setIsSelected}      
       />
     </div>
     

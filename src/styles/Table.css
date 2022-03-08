@@ -1,0 +1,42 @@
+input[type=checkbox] {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+} 
+input[type=checkbox]:disabled {
+  cursor: not-allowed;
+} 
+
+table {
+  border: 1px solid #eee;
+  border-collapse: collapse;
+  font-size: 12px;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px solid #eee;
+  cursor: auto;
+  padding: 8px;
+  text-align: left;
+}
+
+tr, td {
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+
+}
+tbody tr:hover, td:hover {
+  background-color: #eee;
+  cursor: pointer;  
+}
+
+tr.selected, 
+td.selected {
+  background-color: #e6e6e6;
+}
+
+tr.disabled,
+.disabled td {
+  cursor: not-allowed;
+}
