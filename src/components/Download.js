@@ -27,7 +27,10 @@ const IconDiv = styled.div`
 const DownloadComponent = () => {
   const {files} = data;
   const [selectedCount, setSelectedCount] = useState(0);
+  const [isSelected, setIsSelected] = useState([]);
 
+  const allAvailableFiles = files.filter((file) => file.status === 'available');
+ 
   const selectIcon = () => {
     if(selectedCount === files.length) {
       return checkboxSelected;
@@ -39,7 +42,17 @@ const DownloadComponent = () => {
   } 
   
   const toggleSelectAll = () => {
-    console.log('toggling select All');
+    if(selectedCount === allAvailableFiles.length) {
+      setIsSelected([]);
+      setSelectedCount(0);
+    } else {
+      if(allAvailableFiles.length < files.length){
+        alert('Only files that are available to be downloaded are selected.');
+      }
+      setIsSelected(allAvailableFiles.map((file) => file.name));
+      setSelectedCount(allAvailableFiles.length);
+    }
+    selectIcon();
   }
 
   const handleDownload = () => {
@@ -49,6 +62,7 @@ const DownloadComponent = () => {
   
   return (
     <div>
+      {isSelected}
       <DownloadManagementContainer> 
         <IconDiv>
           <IconButton icon={selectIcon()} role="checkbox" onclickHandler={toggleSelectAll}/>
@@ -56,13 +70,16 @@ const DownloadComponent = () => {
         </IconDiv>
         <IconDiv>
           <IconButton icon={download} role="button" onclickHandler={handleDownload}/>
-          <span>Download Selected</span>
+          <span>Download Selected </span>
         </IconDiv>
         
       </DownloadManagementContainer>
       <Table files={files} 
              selectedCount={selectedCount} 
              setSelectedCount={setSelectedCount}
+             isSelected={isSelected}
+             setIsSelected={setIsSelected}
+             
       />
     </div>
     

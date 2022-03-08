@@ -4,11 +4,18 @@ import styled from '@emotion/styled';
 import capitalize from 'lodash/capitalize'
 
 
-const Table = ({files, selectedCount, setSelectedCount}) => {
+const Table = ({files, selectedCount, setSelectedCount, isSelected, setIsSelected}) => {
   const headings = Object.keys(files[0]);
 
-  const handleCheckboxChange = (e) => {
-    e.target.checked ? setSelectedCount(selectedCount + 1) : setSelectedCount(selectedCount - 1);
+  const handleCheckboxChange = (file, e) => {
+    if(e.target.checked) {
+      setSelectedCount(selectedCount + 1);
+      setIsSelected(isSelected => [...isSelected, file.name]); 
+    } else {
+      setSelectedCount(selectedCount - 1);
+      const newSelected = isSelected.filter((item) => item !== file.name);
+      setIsSelected(newSelected);
+    }
   }
 
   return(
@@ -21,11 +28,14 @@ const Table = ({files, selectedCount, setSelectedCount}) => {
       </thead>
       <tbody>
         {files.map((file) => {
+          let boundCheckboxClick = handleCheckboxChange.bind(this, file);
         return( <tr key={file.name}>
             <td><input 
                   type="checkbox" 
-                  // disabled={file.status === 'available' ? false : true}
-                  onChange={handleCheckboxChange}
+                  id={file.name}
+                  disabled={file.status === 'available' ? false : true}
+                  onChange={boundCheckboxClick}
+                  checked={isSelected.includes(file.name)}
                 />
             </td>
             <td>{file.name}</td>

@@ -13,6 +13,7 @@ const IconSpan = styled.span`
     }
   }}
 `;
+// code for filter: https://codepen.io/sosuke/pen/Pjoqqp
 
 const IconButton = ({icon, role, onclickHandler}) => {
   if(role === 'checkbox') {
