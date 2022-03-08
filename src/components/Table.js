@@ -10,14 +10,22 @@ const Table = ({files, selectedCount, setSelectedCount, isSelected, setIsSelecte
   const handleCheckboxChange = (file, e) => {
     if(e.target.checked) {
       setSelectedCount(selectedCount + 1);
-      setIsSelected(isSelected => [...isSelected, file.name]); 
+      setIsSelected(isSelected => [...isSelected, file]); 
     } else {
       setSelectedCount(selectedCount - 1);
-      const newSelected = isSelected.filter((item) => item !== file.name);
+      const newSelected = isSelected.filter((item) => item.name !== file.name);
       setIsSelected(newSelected);
     }
   }
 
+  const isChecked = (file) => {
+    const findMatch = isSelected.filter((item) => {
+      return item.name === file.name;
+    });
+    return findMatch.length > 0 ? true : false;
+  }
+
+  
   return(
     <table>
       <thead>
@@ -35,7 +43,7 @@ const Table = ({files, selectedCount, setSelectedCount, isSelected, setIsSelecte
                   id={file.name}
                   disabled={file.status === 'available' ? false : true}
                   onChange={boundCheckboxClick}
-                  checked={isSelected.includes(file.name)}
+                  checked={isChecked(file)}
                 />
             </td>
             <td>{file.name}</td>

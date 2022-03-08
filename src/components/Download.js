@@ -24,6 +24,8 @@ const IconDiv = styled.div`
 
 // url('https://www.gstatic.com/images/icons/material/system/2x/check_box_outline_blank_black_20dp.png')
 // url('../../public/checbox_unselected.png')
+
+
 const DownloadComponent = () => {
   const {files} = data;
   const [selectedCount, setSelectedCount] = useState(0);
@@ -49,20 +51,23 @@ const DownloadComponent = () => {
       if(allAvailableFiles.length < files.length){
         alert('Only files that are available to be downloaded are selected.');
       }
-      setIsSelected(allAvailableFiles.map((file) => file.name));
+      setIsSelected(allAvailableFiles.map((file) => file));
       setSelectedCount(allAvailableFiles.length);
     }
     selectIcon();
   }
 
   const handleDownload = () => {
-    console.log('download clicked');
+    if(isSelected.length === 0) {
+      alert(`Please select file(s) to download.`)
+    } else {
+      alert(`Downloading the following files: \n ${isSelected.map((item) => item.device + ": " + item.path + "\n")}`);
+    }
+    
   }
-
   
   return (
     <div>
-      {isSelected}
       <DownloadManagementContainer> 
         <IconDiv>
           <IconButton icon={selectIcon()} role="checkbox" onclickHandler={toggleSelectAll}/>
